@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <SongLink label="Orange Forest" songSrc="/assets/tunes/Orange-Forest.wav" onPlay={playSong} />
       <SongLink label="Rogue Wave" songSrc="/assets/tunes/Rogue-Wave.wav" onPlay={playSong} />
       <SongLink label="Zero ++" songSrc="/assets/tunes/Zero++.wav" onPlay={playSong} />
-      <SongLink label="A Recurring Dream" songSrc="/assets/tunes/A_Recurring_Dream.mp3" onPlay={playSong} />
+      <SongLink label="A Recurring Dream" songSrc="/assets/tunes/A-Recurring-Dream.wav" onPlay={playSong} />
       <SongLink label="Digital Beach" songSrc="/assets/tunes/Digital-Beach.wav" onPlay={playSong} />
       <SongLink label="Endors Gambit" songSrc="/assets/tunes/Endors-Gambit.wav" onPlay={playSong} />
       <SongLink label="The Flowers Of Afterthought" songSrc="/assets/tunes/The-Flowers-Of-Afterthought.wav" onPlay={playSong} />
