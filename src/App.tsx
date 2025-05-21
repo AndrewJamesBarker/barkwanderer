@@ -15,7 +15,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-image cutive-mono-regular">
       <GlassCard className="w-full max-w-4xl">
-        <h1 className="text-lg md:text-xl lg:text-2xl font-light leading-snug tracking-wide text-pink-300 text-center w-full max-w-lg mx-auto mb-11">
+        <h1 className="text-lg  font-extralight leading-snug tracking-wide text-pink-300 text-center w-full max-w-lg mx-auto mb-11">
           BarkWanderer: The Flowers Of Afterthought
         </h1>
         <SongLink

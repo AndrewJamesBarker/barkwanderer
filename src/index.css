@@ -35,7 +35,7 @@
 }
 
 .bg-image {  
-  background-image: url('/assets/images/suburb-sunset-enhanced.png');
+  background-image: url('/assets/images/suburb-sunset-enhanced.webp');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -43,7 +43,7 @@
 
 audio {
   background-color: black;
-  border: 2px solid #ff0396;
+  border: 2px solid #ff60bd;
   border-radius: 12px;
   /* width: 65%; 
   margin-bottom: 3rem; */
