@@ -13,7 +13,7 @@ const SongLink: React.FC<SongLinkProps> = ({ label, songSrc, onPlay }) => {
     return (
             <a href="#" 
             onClick={handleClick}
-            className="text-pink-400 text-xl hover:underline block mb-4">
+            className="text-pink-300 text-base sm:text-lg md:tex-xl hover:underline block mb-4 font-extralight">
                 {label}
             </a>
     );

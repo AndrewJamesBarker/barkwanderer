@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+
+/* font */
+
+.cutive-mono-regular {
+  font-family: "Cutive Mono", monospace;
+
+}
+
+.courier-prime-regular {
+  font-family: "Courier Prime", monospace;
+}
+
+.courier-prime-bold {
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.courier-prime-regular-italic {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.courier-prime-bold-italic {
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.text-shadow-white {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.bg-image {  
+  background-image: url('/assets/images/suburb-sunset-enhanced.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+audio {
+  background-color: black;
+  border: 2px solid #ff0396;
+  border-radius: 12px;
+  /* width: 65%; 
+  margin-bottom: 3rem; */
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+
+/* Styling the control elements */
+audio::-webkit-media-controls {
+  filter: invert(1);
+}
+
+audio::-moz-media-controls {
+  filter: invert(1);
+}
+
