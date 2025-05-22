@@ -6,6 +6,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,7 +21,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    
+    /* ✅ p5 additions */
+    "types": ["p5"],
+    "baseUrl": "./src",
+    "paths": {
+      "p5.sound": ["types/p5.sound.d.ts"]
+    }
   },
   "include": ["src"]
 }
