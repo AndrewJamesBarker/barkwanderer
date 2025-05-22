@@ -12,7 +12,7 @@ const SongLink: React.FC<SongLinkProps> = ({ label, songSrc, onPlay, isActive })
         onPlay(songSrc);
     };
     const baseStyle = "text-base block mb-4 transition-colors duration-200 font-extralight z-10";
-    const activeStyle = "text-white font-bold underline";
+    const activeStyle = "text-pink-600 font-bold underline";
     const inactiveStyle = "text-pink-300 hover:underline";
 
 
