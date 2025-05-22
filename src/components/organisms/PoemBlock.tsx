@@ -97,7 +97,7 @@ const renderChunk = (
         <div
           key={i}
           className={`${
-            isActive ? "text-white" : "text-pink-300"
+            isActive ? "text-white font-extrabold" : "text-pink-300"
           }`}
         >
           {indent}
