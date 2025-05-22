@@ -3,17 +3,23 @@ interface SongLinkProps {
     label: string;
     songSrc: string;
     onPlay: (src: string) => void;
+    isActive: boolean;
 }
 
-const SongLink: React.FC<SongLinkProps> = ({ label, songSrc, onPlay }) => {
+const SongLink: React.FC<SongLinkProps> = ({ label, songSrc, onPlay, isActive }) => {
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         onPlay(songSrc);
     };
+    const baseStyle = "text-base block mb-4 transition-colors duration-200 font-extralight";
+    const activeStyle = "text-white font-bold underline";
+    const inactiveStyle = "text-pink-300 hover:underline";
+
+
     return (
             <a href="#" 
             onClick={handleClick}
-            className="text-pink-300 text-base  hover:underline block mb-4 font-extralight">
+            className={`${baseStyle} ${isActive ? activeStyle : inactiveStyle}`}>
                 {label}
             </a>
     );
