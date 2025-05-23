@@ -30,7 +30,7 @@ const App: React.FC = () => {
     <div className="bg-black min-h-screen flex flex-col items-center justify-center p-8 bg-image cutive-mono-regular">
 
       <GlassCard className="w-full max-w-4xl relative overflow-hidden">
-        <h1 className="text-lg font-extralight leading-snug tracking-wide text-pink-300 text-center w-full max-w-lg mx-auto mb-11 z-10">
+        <h1 className="text-lg font-extralight leading-snug tracking-wide text-pink-200 text-center w-full max-w-lg mx-auto mb-11 z-10">
           BarkWanderer: The Flowers Of Afterthought
         </h1>
         {songs.map((song) => (
