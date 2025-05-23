@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import SongLink from "./components/atoms/SongLink";
 import GlassCard from "./components/molecules/GlassCard";
 import PoemBlock from "./components/organisms/PoemBlock";
+import Footer from "./components/organisms/Footer";
 
 const songs = [
   { label: "Scene = The_Block", src: "/assets/tunes/Scene=The_Block.wav" },
@@ -27,8 +28,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center justify-center p-8 bg-image cutive-mono-regular">
+  <div className="bg-black min-h-screen flex flex-col justify-between p-8 bg-image cutive-mono-regular">
 
+    {/* Centered content wrapper */}
+    <div className="flex flex-col items-center">
       <GlassCard className="w-full max-w-4xl relative overflow-hidden">
         <h1 className="text-lg font-extralight leading-snug tracking-wide text-pink-200 text-center w-full max-w-lg mx-auto mb-11 z-10">
           BarkWanderer: The Flowers Of Afterthought
@@ -42,16 +45,22 @@ const App: React.FC = () => {
             isActive={nowPlaying === song.label}
           />
         ))}
-     
+
         <audio
           ref={audioRef}
           controls
           className="mt-11 w-full max-w-lg mx-auto block z-10"
         />
       </GlassCard>
+
       <PoemBlock nowPlaying={nowPlaying} />
     </div>
-  );
+
+    {/* Footer stays separate and aligned how you want */}
+    <Footer />
+  </div>
+);
+
 };
 
 export default App;
