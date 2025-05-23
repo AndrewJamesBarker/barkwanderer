@@ -3,6 +3,7 @@ import SongLink from "./components/atoms/SongLink";
 import GlassCard from "./components/molecules/GlassCard";
 import PoemBlock from "./components/organisms/PoemBlock";
 import Footer from "./components/organisms/Footer";
+import AudioVisualLayer from "./components/molecules/AudioVisualLayer";
 
 const songs = [
   { label: "Scene = The_Block", src: "/assets/tunes/Scene=The_Block.wav" },
@@ -33,6 +34,8 @@ const App: React.FC = () => {
     {/* Centered content wrapper */}
     <div className="flex flex-col items-center">
       <GlassCard className="w-full max-w-4xl relative overflow-hidden">
+        <AudioVisualLayer songLabel={nowPlaying} />
+
         <h1 className="text-lg font-extralight leading-snug tracking-wide text-pink-200 text-center w-full max-w-lg mx-auto mb-11 z-10">
           BarkWanderer: The Flowers Of Afterthought
         </h1>
@@ -52,7 +55,6 @@ const App: React.FC = () => {
           className="mt-11 w-full max-w-lg mx-auto block z-10"
         />
       </GlassCard>
-
       <PoemBlock nowPlaying={nowPlaying} />
     </div>
 

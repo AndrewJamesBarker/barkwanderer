@@ -38,6 +38,7 @@
   text-shadow: 2px 0px 0px rgba(0, 0, 0, 0.5); /* Example: 2px right, 2px down, 3px blur, 70% opacity black */
 }
 
+
 .bg-image {  
   background-image: url('/assets/images/suburb-sunset-enhanced.webp');
   background-size: cover;
