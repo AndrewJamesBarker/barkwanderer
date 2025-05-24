@@ -10,7 +10,7 @@ const DigitalBeachScene: React.FC = () => {
   useFrame(() => {
     if (!meshRef.current || data.length === 0) return;
 
-    const bass = data[2]; // simulate low frequency (try [2], [4], etc.)
+    const bass = data[2]; 
     const scale = 1 + bass / 100;
 
     meshRef.current.scale.set(scale, scale, scale);

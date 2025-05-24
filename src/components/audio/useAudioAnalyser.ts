@@ -13,6 +13,8 @@ export const useAudioAnalyser = () => {
 
     const update = () => {
       cachedAnalyser!.getByteFrequencyData(dataArray);
+        // console.log("👂 raw data:", [...dataArray.slice(0, 8)]); // first 8 bins
+
       setFrequencyData(new Uint8Array(dataArray));
       frameRef.current = requestAnimationFrame(update);
     };
