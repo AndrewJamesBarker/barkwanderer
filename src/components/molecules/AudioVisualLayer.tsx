@@ -3,6 +3,7 @@ import React from "react";
 import R3FCanvas from "../audio/R3FCanvas";
 import RogueWaveScene from "../audio/scenes/RogueWaveScene";
 import DigitalBeachScene from "../audio/scenes/DigitalBeachScene";
+import ZeroScene from "../audio/scenes/Zero++";
 // import other scenes as needed
 import RecurringDreamScene from "../audio/scenes/RecurringDreamScene";
 
@@ -19,6 +20,8 @@ const AudioVisualLayer: React.FC<AudioVisualLayerProps> = ({ songLabel }) => {
         return <DigitalBeachScene />;
       case "A Recurring Dream":
         return <RecurringDreamScene />; 
+      case "Zero++":
+        return <ZeroScene />;
 
       // etc.
       default:

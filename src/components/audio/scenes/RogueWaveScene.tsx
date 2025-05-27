@@ -1,84 +1,79 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { useRef, useMemo, useEffect } from "react";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { Water } from "three-stdlib";
 import { useAudioAnalyser } from "../useAudioAnalyser";
-import type { Mesh, ShaderMaterial } from "three";
+import WaterNormals from "../../../../public/assets/waternormals.jpeg";
 
-const vertexShader = `
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-const fragmentShader = `
-  precision mediump float;
-  uniform float uTime;
-  uniform float uVolume;
-  varying vec2 vUv;
-
-  float ripple(vec2 uv, float time) {
-    float dist = distance(uv, vec2(0.5));
-    float speed = 0.5 + uVolume * 0.01; // modulate speed with bass
-    float wave = sin((dist - time * speed) * 40.0); // wavefront expands
-    float envelope = exp(-6.0 * dist); // fade ripple with distance
-    float gate = step(5.0, uVolume); // 0 if volume < 5, 1 if volume ≥ 5
-    return wave * envelope * gate;
-  }
-
-  void main() {
-  float r = ripple(vUv, uTime);
-  float edge = 1.0 - smoothstep(0.005, 0.01, abs(r));
-
-  // Gate output: only show ripples if volume is above threshold
-  if (uVolume < 100.0) {
-    discard; // fully transparent pixel, no blending
-  }
-
-  vec3 color = vec3(edge); // sharp white ring
-  float fade = smoothstep(5.0, 6.0, uVolume); // fade in between 5 and 6
-  float alpha = edge * fade;      // full transparency in between
-
-  gl_FragColor = vec4(color, alpha);
-}
-
-`;
-
-const RogueWaveScene: React.FC = () => {
-  const meshRef = useRef<Mesh>(null);
-  const shaderRef = useRef<ShaderMaterial>(null);
+export const RogueWaveScene: React.FC = () => {
+  const ref = useRef<any>(null); // Must be "any" to access material.uniforms
+  const { camera, scene } = useThree();
   const data = useAudioAnalyser();
-  const timeRef = useRef(0);
 
-  const uniforms = useRef<{
-    uTime: { value: number };
-    uVolume: { value: number };
-  }>({
-    uTime: { value: 0 },
-    uVolume: { value: 0 },
-  }).current;
+  // Add fog once on mount
+  useEffect(() => {
+    scene.fog = new THREE.Fog("#020509", 1, 50); // cyber ink fog
+  }, [scene]);
+
+  const waterNormals = useLoader(THREE.TextureLoader, WaterNormals);
+  waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
+
+  const config = useMemo(
+    () => ({
+      textureWidth: 512,
+      textureHeight: 512,
+      waterNormals,
+      sunDirection: new THREE.Vector3(),
+      sunColor: 0xffffff,
+      waterColor: new THREE.Color(0x15273a), // default dark blue-black
+      distortionScale: 4.0,
+      fog: true,
+      format: THREE.LinearSRGBColorSpace,
+    }),
+    [waterNormals]
+  );
+
+  const geometry = useMemo(() => new THREE.PlaneGeometry(1000, 1000), []);
+  const water = useMemo(() => new Water(geometry, config), [geometry, config]);
 
   useFrame((_, delta) => {
-    timeRef.current += delta;
-    const bass = data[2] ?? 0;
+    const volume = average(data.slice(0, 36));
+    const silence = volume < 1;
 
-    uniforms.uTime.value = timeRef.current;
-    uniforms.uVolume.value = bass;
+    // Smooth camera always — just more when audio is active
+    const targetPos = silence
+      ? new THREE.Vector3(0, 7.5, 11.5)
+      : new THREE.Vector3(0, 8, 12);
+    camera.position.lerp(targetPos, 0.02);
+    camera.lookAt(0, 0, 0);
+
+    if (ref.current?.material?.uniforms) {
+      const uniforms = ref.current.material.uniforms;
+
+      // Animate water even if subtle
+      uniforms.time.value += delta * (0.1 + volume * 0.001);
+
+      // Subtle reactive ripples
+      uniforms.distortionScale.value = 3.5 + volume * 0.03;
+
+      // Blend toward gentle aqua if loud
+      const baseColor = new THREE.Color(0x15273a); // deep steel blue-gray
+      const activeColor = new THREE.Color(0x2e6f88); // smoky sea-blue
+
+
+const blendFactor = Math.min(volume / 80, 6); // keep it subtle
+uniforms.waterColor.value.copy(baseColor).lerp(activeColor, blendFactor);
+
+    }
   });
 
-  return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
-      <planeGeometry args={[10, 10, 128, 128]} />
-      <shaderMaterial
-        uniforms={uniforms}
-        ref={shaderRef}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        transparent={true}
-        depthWrite={false}
-      />
-    </mesh>
-  );
+  return <primitive ref={ref} object={water} rotation={[-Math.PI / 2, 0, 0]} />;
 };
 
 export default RogueWaveScene;
+
+function average(arr: Uint8Array): number {
+  return arr.length === 0
+    ? 0
+    : arr.reduce((sum, val) => sum + val, 0) / arr.length;
+}

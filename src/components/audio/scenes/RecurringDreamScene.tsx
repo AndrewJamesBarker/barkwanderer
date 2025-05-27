@@ -1,5 +1,5 @@
 // src/components/audio/scenes/RecurringDreamScene.tsx
-
+// https://codesandbox.io/p/sandbox/mbfzf used as foundation
 import * as THREE from "three";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -14,6 +14,7 @@ const RecurringDreamScene: React.FC = () => {
     if (!groupRef.current || data.length === 0) return;
 
     const volume = average(data.slice(0, 128));
+    
     const isActive = volume > 9;
 
     if (isActive) {
