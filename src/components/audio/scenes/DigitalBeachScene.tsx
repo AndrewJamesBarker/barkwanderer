@@ -16,29 +16,17 @@ const DigitalBeachScene: React.FC = () => {
 
   // Create multiple jellyfish data - FRESH EVERY TIME
   const jellyfishData = useMemo(() => {
-    const jellyfish = [];
-    const numJellyfish = 8;
-    
-    // Fixed positions in a perfect circle - no randomness!
-    for (let i = 0; i < numJellyfish; i++) {
-      const angle = (i / numJellyfish) * Math.PI * 2;
-      const radius = 3; // Fixed radius for consistent spread
-      
-      jellyfish.push({
-        id: i,
-        scale: 0.6 + (i % 3) * 0.1, // Predictable sizes: 0.6, 0.7, 0.8
-        startX: Math.cos(angle) * radius, // Perfect circle, no random offset
-        startY: Math.sin(i * 1.3) * 1.5, // Predictable Y spread
-        startZ: -4 - (i % 4), // Predictable depths: -4, -5, -6, -7
-        driftRadius: 1.0 + (i % 3) * 0.3, // Predictable drift: 1.0, 1.3, 1.6
-        driftSpeed: 0.4 + (i % 4) * 0.1, // Predictable speeds: 0.4, 0.5, 0.6, 0.7
-        rotationSpeed: 0.02 + (i % 3) * 0.01,
-        phase: angle, // Use the same angle for phase
-        colorVariant: i / numJellyfish, // Even color distribution
-      });
-    }
-    
-    return jellyfish;
+    // Hard-coded positions that are guaranteed to be visible and separated
+    return [
+      { id: 0, scale: 0.7, startX: -4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.4, rotationSpeed: 0.02, phase: 0, colorVariant: 0 },
+      { id: 1, scale: 0.7, startX: 4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.5, rotationSpeed: 0.03, phase: 1, colorVariant: 0.125 },
+      { id: 2, scale: 0.7, startX: 0, startY: 2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.6, rotationSpeed: 0.025, phase: 2, colorVariant: 0.25 },
+      { id: 3, scale: 0.7, startX: 0, startY: -2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.7, rotationSpeed: 0.035, phase: 3, colorVariant: 0.375 },
+      { id: 4, scale: 0.7, startX: -2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.45, rotationSpeed: 0.028, phase: 4, colorVariant: 0.5 },
+      { id: 5, scale: 0.7, startX: 2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.55, rotationSpeed: 0.032, phase: 5, colorVariant: 0.625 },
+      { id: 6, scale: 0.7, startX: -2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.65, rotationSpeed: 0.022, phase: 6, colorVariant: 0.75 },
+      { id: 7, scale: 0.7, startX: 2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.75, rotationSpeed: 0.038, phase: 7, colorVariant: 0.875 }
+    ];
   }, [mountKey]); // Fresh on each mount
 
   // Initialize jellyfish refs and drift progress
@@ -46,7 +34,6 @@ const DigitalBeachScene: React.FC = () => {
     // Force create exactly 8 slots - no dependencies on jellyfishData.length
     jellyfishRefs.current = new Array(8).fill(null);
     driftProgressRefs.current = new Array(8).fill(0);
-    console.log("Initialized refs for 8 jellyfish"); // Debug log
   }, []); // No dependencies - run once and only once
 
   // Enhanced organic jellyfish material with pastel highlights
@@ -331,7 +318,6 @@ const DigitalBeachScene: React.FC = () => {
           ref={(ref) => {
             if (ref) {
               jellyfishRefs.current[index] = ref;
-              console.log(`Jellyfish ${index} ref set`); // Debug log
             }
           }}
           position={[
