@@ -13,21 +13,21 @@ const DigitalBeachScene: React.FC = () => {
   // Jellyfish data with all original properties
   const jellyfishData = useMemo(() => {
     return [
-      { id: 0, scale: 0.7, startX: -4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.4, rotationSpeed: 0.02, phase: 0, colorVariant: 0 },
-      { id: 1, scale: 0.7, startX: 4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.5, rotationSpeed: 0.03, phase: 1, colorVariant: 0.125 },
-      { id: 2, scale: 0.7, startX: 0, startY: 2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.6, rotationSpeed: 0.025, phase: 2, colorVariant: 0.25 },
-      { id: 3, scale: 0.7, startX: 0, startY: -2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.7, rotationSpeed: 0.035, phase: 3, colorVariant: 0.375 },
-      { id: 4, scale: 0.7, startX: -2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.45, rotationSpeed: 0.028, phase: 4, colorVariant: 0.5 },
-      { id: 5, scale: 0.7, startX: 2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.55, rotationSpeed: 0.032, phase: 5, colorVariant: 0.625 },
-      { id: 6, scale: 0.7, startX: -2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.65, rotationSpeed: 0.022, phase: 6, colorVariant: 0.75 },
-      { id: 7, scale: 0.7, startX: 2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.75, rotationSpeed: 0.038, phase: 7, colorVariant: 0.875 }
+      { id: 0, scale: 0.5, startX: -4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.4, rotationSpeed: 0.02, phase: 0, colorVariant: 0 },
+      { id: 1, scale: 0.5, startX: 4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.5, rotationSpeed: 0.03, phase: 1, colorVariant: 0.125 },
+      { id: 2, scale: 0.5, startX: 0, startY: 2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.6, rotationSpeed: 0.025, phase: 2, colorVariant: 0.25 },
+      { id: 3, scale: 0.5, startX: 0, startY: -2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.7, rotationSpeed: 0.035, phase: 3, colorVariant: 0.375 },
+      { id: 4, scale: 0.5, startX: -2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.45, rotationSpeed: 0.028, phase: 4, colorVariant: 0.5 },
+      { id: 5, scale: 0.5, startX: 2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.55, rotationSpeed: 0.032, phase: 5, colorVariant: 0.625 },
+      { id: 6, scale: 0.5, startX: -2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.65, rotationSpeed: 0.022, phase: 6, colorVariant: 0.75 },
+      { id: 7, scale: 0.5, startX: 2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.75, rotationSpeed: 0.038, phase: 7, colorVariant: 0.875 }
     ];
   }, []);
 
   // Ultra-rounded organic geometry - restored
   const organicGeometry = useMemo(() => {
     // Higher subdivision for maximum smoothness
-    const geometry = new THREE.IcosahedronGeometry(1, 6);
+    const geometry = new THREE.IcosahedronGeometry(0.8, 6);
     
     // Create ultra-soft jellyfish form
     const positions = geometry.attributes.position.array as Float32Array;
@@ -205,13 +205,13 @@ const DigitalBeachScene: React.FC = () => {
           // Enhanced fresnel for ultra-soft translucency
           float fresnel = pow(1.0 - abs(dot(vNormal, normalize(vPosition))), 2.0);
           
-          // Audio-reactive soft glow - only when playing (INCREASED SENSITIVITY)
-          float glow = (audioLevel * 0.8 + fresnel * 0.3) * isPlaying;
-          baseColor += glow * vec3(0.2, 0.3, 0.35);
+          // Audio-reactive soft glow - REDUCED intensity and more colored (less white)
+          float glow = (audioLevel * 0.4 + fresnel * 0.2) * isPlaying; // Reduced from 0.8 and 0.3
+          baseColor += glow * vec3(0.1, 0.15, 0.2); // Reduced intensity and more blue-tinted
           
-          // Ultra-organic opacity with soft ripples (INCREASED AUDIO SENSITIVITY)
+          // Ultra-organic opacity with soft ripples (REDUCED AUDIO SENSITIVITY)
           float rippleOpacity = sin(vPosition.y * 5.0 + time * isPlaying + instancePhase) * 0.08;
-          float finalOpacity = opacity + fresnel * 0.2 + audioLevel * 0.4 + rippleOpacity;
+          float finalOpacity = opacity + fresnel * 0.15 + audioLevel * 0.2 + rippleOpacity; // Reduced audio effect
           
           gl_FragColor = vec4(baseColor, finalOpacity);
         }
@@ -268,9 +268,9 @@ const DigitalBeachScene: React.FC = () => {
         const boundedY = Math.max(-2, Math.min(2, driftY + audioBob));
         const boundedZ = Math.max(-8, Math.min(-1, driftZ));
         
-        // Individual scaling based on base scale
-        const organicScale = jellyfish.scale * (0.5 + Math.sin(timeRef.current * 1.0 + jellyfish.phase) * 0.12 + Math.cos(timeRef.current * 1.8 + jellyfish.phase) * 0.06);
-        const audioScale = 1 + (avgVolume / 800);
+        // Individual scaling based on base scale - REDUCED scaling variation
+        const organicScale = jellyfish.scale * (0.4 + Math.sin(timeRef.current * 1.0 + jellyfish.phase) * 0.08 + Math.cos(timeRef.current * 1.8 + jellyfish.phase) * 0.04); // Reduced from 0.5, 0.12, 0.06
+        const audioScale = 1 + (avgVolume / 1200); // Reduced from 800 to 1200
         const finalScale = organicScale * audioScale;
         
         // Individual rotation
