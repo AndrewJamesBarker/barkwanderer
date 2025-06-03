@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect } from "react";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Water } from "three-stdlib";
 import { useAudioAnalyser } from "../useAudioAnalyser";
-import WaterNormals from "../../../../public/assets/waternormals.jpeg";
+import WaterNormals from "/src//assets/waternormals.jpeg";
 
 export const RogueWaveScene: React.FC = () => {
   const ref = useRef<any>(null); // Must be "any" to access material.uniforms
@@ -60,10 +60,8 @@ export const RogueWaveScene: React.FC = () => {
       const baseColor = new THREE.Color(0x15273a); // deep steel blue-gray
       const activeColor = new THREE.Color(0x2e6f88); // smoky sea-blue
 
-
-const blendFactor = Math.min(volume / 80, 6); // keep it subtle
-uniforms.waterColor.value.copy(baseColor).lerp(activeColor, blendFactor);
-
+      const blendFactor = Math.min(volume / 80, 6); // keep it subtle
+      uniforms.waterColor.value.copy(baseColor).lerp(activeColor, blendFactor);
     }
   });
 

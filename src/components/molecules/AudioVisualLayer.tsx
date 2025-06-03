@@ -4,6 +4,7 @@ import R3FCanvas from "../audio/R3FCanvas";
 import RogueWaveScene from "../audio/scenes/RogueWaveScene";
 import DigitalBeachScene from "../audio/scenes/DigitalBeachScene";
 import ZeroScene from "../audio/scenes/Zero++";
+import TheBlockScene from "../audio/scenes/TheBlockScene";
 // import other scenes as needed
 import RecurringDreamScene from "../audio/scenes/RecurringDreamScene";
 
@@ -14,6 +15,8 @@ interface AudioVisualLayerProps {
 const AudioVisualLayer: React.FC<AudioVisualLayerProps> = ({ songLabel }) => {
   const getScene = () => {
     switch (songLabel) {
+      case "Scene = The_Block":
+        return <TheBlockScene />;
       case "Rogue Wave":
         return <RogueWaveScene />;
       case "Digital Beach": 

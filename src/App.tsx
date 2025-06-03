@@ -6,14 +6,14 @@ import Footer from "./components/organisms/Footer";
 import AudioVisualLayer from "./components/molecules/AudioVisualLayer";
 
 const songs = [
-  { label: "Scene = The_Block", src: "/assets/tunes/Scene=The_Block.wav" },
-  { label: "Orange Forest", src: "/assets/tunes/Orange-Forest.wav" },
-  { label: "Rogue Wave", src: "/assets/tunes/Rogue-Wave.wav" },
-  { label: "Zero ++", src: "/assets/tunes/Zero++.wav" },
-  { label: "A Recurring Dream", src: "/assets/tunes/A-Recurring-Dream.wav" },
-  { label: "Digital Beach", src: "/assets/tunes/Digital-Beach.wav" },
-  { label: "Endors Gambit", src: "/assets/tunes/Endors-Gambit.wav" },
-  { label: "The Flowers Of Afterthought", src: "/assets/tunes/The-Flowers-Of-Afterthought.wav" },
+  { label: "Scene = The_Block", src: "/assets/tunes/Scene=The_Block.mp3" },
+  { label: "Orange Forest", src: "/assets/tunes/Orange-Forest.mp3" },
+  { label: "Rogue Wave", src: "/assets/tunes/Rogue-Wave.mp3" },
+  { label: "Zero ++", src: "/assets/tunes/Zero++.mp3" },
+  { label: "A Recurring Dream", src: "/assets/tunes/A-Recurring-Dream.mp3" },
+  { label: "Digital Beach", src: "/assets/tunes/Digital-Beach.mp3" },
+  { label: "Endors Gambit", src: "/assets/tunes/Endors-Gambit.mp3" },
+  { label: "The Flowers Of Afterthought", src: "/assets/tunes/The-Flowers-Of-Afterthought.mp3" },
 ];
 const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
