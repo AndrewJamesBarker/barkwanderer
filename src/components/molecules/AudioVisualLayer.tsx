@@ -3,10 +3,11 @@ import React from "react";
 import R3FCanvas from "../audio/R3FCanvas";
 import RogueWaveScene from "../audio/scenes/RogueWaveScene";
 import DigitalBeachScene from "../audio/scenes/DigitalBeachScene";
-import ZeroScene from "../audio/scenes/Zero++";
+import ZeroScene from "../audio/scenes/ZeroScene";
 import TheBlockScene from "../audio/scenes/TheBlockScene";
 import OrangeForestScene from "../audio/scenes/OrangeForest";
 import RecurringDreamScene from "../audio/scenes/RecurringDreamScene";
+import EndorsGambitScene from "../audio/scenes/EndorsGambitScene";
 
 interface AudioVisualLayerProps {
   songLabel: string | null;
@@ -23,11 +24,12 @@ const AudioVisualLayer: React.FC<AudioVisualLayerProps> = ({ songLabel }) => {
         return <DigitalBeachScene key={songLabel} />;
       case "A Recurring Dream":
         return <RecurringDreamScene key={songLabel} />; 
-      case "Zero++":
+      case "Zero ++":
         return <ZeroScene key={songLabel} />;
       case "Orange Forest":
         return <OrangeForestScene key={songLabel} />;
-
+      case "Endors Gambit":
+        return <EndorsGambitScene key={songLabel} />;
       // etc.
       default:
         return null;

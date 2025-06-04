@@ -3,7 +3,7 @@ import { useRef, useMemo, useEffect } from "react";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Water } from "three-stdlib";
 import { useAudioAnalyser } from "../useAudioAnalyser";
-import WaterNormals from "/src//assets/waternormals.jpeg";
+import WaterNormals from "/src/assets/waternormals.jpeg";
 
 export const RogueWaveScene: React.FC = () => {
   const ref = useRef<any>(null); // Must be "any" to access material.uniforms

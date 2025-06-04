@@ -147,7 +147,7 @@ const TheBlockScene: React.FC = () => {
   // Circuit board base material - translucent and elegant
   const baseMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#8a7a8a", // Lighter shade for better visibility
+      color: "#FFB6C1", // Lighter shade for better visibility
       roughness: 0.7,
       metalness: 0.1,
       transparent: true,
@@ -348,26 +348,26 @@ const TheBlockScene: React.FC = () => {
     fiberId += mainLayer.length;
     layers.push(...mainLayer.map(fiber => ({ ...fiber, yOffset: 0 })));
     
-    // Second layer (deeper) - even less dense
-    const layer2Material = createLayerMaterial(0.6, 0.7);
+    // Second layer (deeper) - keep brightness high for visible lights
+    const layer2Material = createLayerMaterial(0.6, 0.9);
     const layer2 = createMatrixLayer(10, 2.0, fiberId, layer2Material);
     fiberId += layer2.length;
     layers.push(...layer2.map(fiber => ({ ...fiber, yOffset: -0.1 })));
     
-    // Third layer (medium distance)
-    const layer3Material = createLayerMaterial(0.4, 0.5);
+    // Third layer (medium distance) - boost brightness
+    const layer3Material = createLayerMaterial(0.4, 0.8);
     const layer3 = createMatrixLayer(18, 2.5, fiberId, layer3Material);
     fiberId += layer3.length;
     layers.push(...layer3.map(fiber => ({ ...fiber, yOffset: -0.4 })));
     
-    // Fourth layer (far distance)
-    const layer4Material = createLayerMaterial(0.25, 0.35);
+    // Fourth layer (far distance) - boost brightness
+    const layer4Material = createLayerMaterial(0.25, 0.7);
     const layer4 = createMatrixLayer(22, 3.5, fiberId, layer4Material);
     fiberId += layer4.length;
     layers.push(...layer4.map(fiber => ({ ...fiber, yOffset: -0.6 })));
     
-    // Fifth layer (very far in the distance) - much larger coverage
-    const layer5Material = createLayerMaterial(0.15, 0.2);
+    // Fifth layer (very far in the distance) - boost brightness significantly
+    const layer5Material = createLayerMaterial(0.15, 0.6);
     const layer5 = createMatrixLayer(30, 4.0, fiberId, layer5Material); // Even bigger grid
     fiberId += layer5.length;
     layers.push(...layer5.map(fiber => ({ ...fiber, yOffset: -1.2 }))); // Much farther back
