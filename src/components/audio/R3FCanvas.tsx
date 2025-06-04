@@ -10,6 +10,13 @@ const R3FCanvas: React.FC<R3FCanvasProps> = ({ children }) => {
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 25 }}
+      gl={{
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance",
+        antialias: false, // Disable for performance
+        stencil: false,
+        depth: true,
+      }}
       style={{
         position: "absolute",
         inset: 0,

@@ -12,7 +12,13 @@ export const RogueWaveScene: React.FC = () => {
 
   // Add fog once on mount
   useEffect(() => {
+    const originalFog = scene.fog; // Store original fog
     scene.fog = new THREE.Fog("#020509", 1, 50); // cyber ink fog
+    
+    // Cleanup fog when component unmounts
+    return () => {
+      scene.fog = originalFog; // Restore original fog (usually null)
+    };
   }, [scene]);
 
   const waterNormals = useLoader(THREE.TextureLoader, WaterNormals);

@@ -18,7 +18,7 @@ const songs = [
 const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [nowPlaying, setNowPlaying] = React.useState<string | null>(null);
-
+  
   const playSong = (src: string, label: string) => {
     if (audioRef.current) {
       audioRef.current.src = src;

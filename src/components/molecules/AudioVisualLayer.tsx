@@ -5,7 +5,7 @@ import RogueWaveScene from "../audio/scenes/RogueWaveScene";
 import DigitalBeachScene from "../audio/scenes/DigitalBeachScene";
 import ZeroScene from "../audio/scenes/Zero++";
 import TheBlockScene from "../audio/scenes/TheBlockScene";
-// import other scenes as needed
+import OrangeForestScene from "../audio/scenes/OrangeForest";
 import RecurringDreamScene from "../audio/scenes/RecurringDreamScene";
 
 interface AudioVisualLayerProps {
@@ -16,15 +16,17 @@ const AudioVisualLayer: React.FC<AudioVisualLayerProps> = ({ songLabel }) => {
   const getScene = () => {
     switch (songLabel) {
       case "Scene = The_Block":
-        return <TheBlockScene />;
+        return <TheBlockScene key={songLabel} />;
       case "Rogue Wave":
-        return <RogueWaveScene />;
+        return <RogueWaveScene key={songLabel} />;
       case "Digital Beach": 
-        return <DigitalBeachScene />;
+        return <DigitalBeachScene key={songLabel} />;
       case "A Recurring Dream":
-        return <RecurringDreamScene />; 
+        return <RecurringDreamScene key={songLabel} />; 
       case "Zero++":
-        return <ZeroScene />;
+        return <ZeroScene key={songLabel} />;
+      case "Orange Forest":
+        return <OrangeForestScene key={songLabel} />;
 
       // etc.
       default:

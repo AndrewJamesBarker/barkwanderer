@@ -147,7 +147,7 @@ const TheBlockScene: React.FC = () => {
   // Circuit board base material - translucent and elegant
   const baseMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#5a4a5a", // More subtle, elegant background
+      color: "#8a7a8a", // Lighter shade for better visibility
       roughness: 0.7,
       metalness: 0.1,
       transparent: true,
