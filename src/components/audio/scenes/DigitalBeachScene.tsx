@@ -13,14 +13,14 @@ const DigitalBeachScene: React.FC = () => {
   // Jellyfish data with all original properties
   const jellyfishData = useMemo(() => {
     return [
-      { id: 0, scale: 0.5, startX: -4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.4, rotationSpeed: 0.02, phase: 0, colorVariant: 0 },
-      { id: 1, scale: 0.5, startX: 4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.5, rotationSpeed: 0.03, phase: 1, colorVariant: 0.125 },
-      { id: 2, scale: 0.5, startX: 0, startY: 2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.6, rotationSpeed: 0.025, phase: 2, colorVariant: 0.25 },
-      { id: 3, scale: 0.5, startX: 0, startY: -2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.7, rotationSpeed: 0.035, phase: 3, colorVariant: 0.375 },
-      { id: 4, scale: 0.5, startX: -2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.45, rotationSpeed: 0.028, phase: 4, colorVariant: 0.5 },
-      { id: 5, scale: 0.5, startX: 2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.55, rotationSpeed: 0.032, phase: 5, colorVariant: 0.625 },
-      { id: 6, scale: 0.5, startX: -2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.65, rotationSpeed: 0.022, phase: 6, colorVariant: 0.75 },
-      { id: 7, scale: 0.5, startX: 2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.75, rotationSpeed: 0.038, phase: 7, colorVariant: 0.875 }
+      { id: 0, scale: 0.65, startX: -4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.4, rotationSpeed: 0.02, phase: 0, colorVariant: 0 },
+      { id: 1, scale: 0.65, startX: 4, startY: 0, startZ: -4, driftRadius: 0.5, driftSpeed: 0.5, rotationSpeed: 0.03, phase: 1, colorVariant: 0.125 },
+      { id: 2, scale: 0.65, startX: 0, startY: 2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.6, rotationSpeed: 0.025, phase: 2, colorVariant: 0.25 },
+      { id: 3, scale: 0.65, startX: 0, startY: -2, startZ: -4, driftRadius: 0.5, driftSpeed: 0.7, rotationSpeed: 0.035, phase: 3, colorVariant: 0.375 },
+      { id: 4, scale: 0.65, startX: -2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.45, rotationSpeed: 0.028, phase: 4, colorVariant: 0.5 },
+      { id: 5, scale: 0.65, startX: 2, startY: 1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.55, rotationSpeed: 0.032, phase: 5, colorVariant: 0.625 },
+      { id: 6, scale: 0.65, startX: -2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.65, rotationSpeed: 0.022, phase: 6, colorVariant: 0.75 },
+      { id: 7, scale: 0.65, startX: 2, startY: -1, startZ: -6, driftRadius: 0.5, driftSpeed: 0.75, rotationSpeed: 0.038, phase: 7, colorVariant: 0.875 }
     ];
   }, []);
 

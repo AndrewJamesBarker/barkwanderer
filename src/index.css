@@ -64,3 +64,22 @@ audio::-webkit-media-controls {
 audio::-moz-media-controls {
   filter: invert(1);
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  /* Reduce left/right margins on mobile */
+  .mobile-reduced-padding {
+    padding-left: 1rem !important; /* 4 units instead of 8 */
+    padding-right: 1rem !important; /* 4 units instead of 8 */
+  }
+  
+  /* Center-align footer on mobile */
+  .mobile-center-footer {
+    text-align: center !important;
+  }
+  
+  /* More top margin for footer */
+  .mobile-footer-spacing {
+    margin-top: 3rem !important;
+  }
+}

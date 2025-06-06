@@ -31,7 +31,7 @@ export const RogueWaveScene: React.FC = () => {
       waterNormals,
       sunDirection: new THREE.Vector3(),
       sunColor: 0xffffff,
-      waterColor: new THREE.Color(0x15273a), // default dark blue-black
+      waterColor: new THREE.Color(0x3a1530), // dark purple-pink
       distortionScale: 4.0,
       fog: true,
       format: THREE.LinearSRGBColorSpace,
@@ -51,7 +51,7 @@ export const RogueWaveScene: React.FC = () => {
       ? new THREE.Vector3(0, 7.5, 11.5)
       : new THREE.Vector3(0, 8, 12);
     camera.position.lerp(targetPos, 0.02);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(0, 1, 0); // Look slightly above horizon
 
     if (ref.current?.material?.uniforms) {
       const uniforms = ref.current.material.uniforms;
@@ -62,9 +62,9 @@ export const RogueWaveScene: React.FC = () => {
       // Subtle reactive ripples
       uniforms.distortionScale.value = 3.5 + volume * 0.03;
 
-      // Blend toward gentle aqua if loud
-      const baseColor = new THREE.Color(0x15273a); // deep steel blue-gray
-      const activeColor = new THREE.Color(0x2e6f88); // smoky sea-blue
+      // Blend toward gentle purple-pink if loud
+      const baseColor = new THREE.Color(0x3a1530); // dark purple-pink
+      const activeColor = new THREE.Color(0x7a4a70); // brighter purple-pink
 
       const blendFactor = Math.min(volume / 80, 6); // keep it subtle
       uniforms.waterColor.value.copy(baseColor).lerp(activeColor, blendFactor);

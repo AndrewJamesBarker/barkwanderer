@@ -8,6 +8,7 @@ import TheBlockScene from "../audio/scenes/TheBlockScene";
 import OrangeForestScene from "../audio/scenes/OrangeForest";
 import RecurringDreamScene from "../audio/scenes/RecurringDreamScene";
 import EndorsGambitScene from "../audio/scenes/EndorsGambitScene";
+import FlowersScene from "../audio/scenes/FlowersScene";
 
 interface AudioVisualLayerProps {
   songLabel: string | null;
@@ -30,7 +31,8 @@ const AudioVisualLayer: React.FC<AudioVisualLayerProps> = ({ songLabel }) => {
         return <OrangeForestScene key={songLabel} />;
       case "Endors Gambit":
         return <EndorsGambitScene key={songLabel} />;
-      // etc.
+      case "The Flowers Of Afterthought":
+        return <FlowersScene key={songLabel} />;
       default:
         return null;
     }

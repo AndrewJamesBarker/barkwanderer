@@ -29,7 +29,7 @@ const App: React.FC = () => {
   };
 
   return (
-  <div className="bg-black min-h-screen flex flex-col justify-between p-8 bg-image cutive-mono-regular">
+  <div className="bg-black min-h-screen flex flex-col justify-between p-8 mobile-reduced-padding bg-image cutive-mono-regular">
 
     {/* Centered content wrapper */}
     <div className="flex flex-col items-center">
