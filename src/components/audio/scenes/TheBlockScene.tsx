@@ -454,6 +454,8 @@ const TheBlockScene: React.FC = () => {
         <primitive object={baseMaterial} />
       </mesh>
       
+
+      
       {/* Multiple layered matrix grids */}
       {allLayers.map((layer, index) => (
         <group key={index} position={[0, layer.yOffset, 0]}>
