@@ -86,11 +86,9 @@ class FireFlyMaterial extends THREE.ShaderMaterial {
 
 const OrangeForestScene: React.FC = () => {
   const orbRef = useRef<THREE.Mesh>(null);
-  const gridRef = useRef<THREE.Mesh>(null);
   const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
   const timeRef = useRef(0);
   const data = useAudioAnalyser();
-  const [isSceneActive, setIsSceneActive] = React.useState(true);
   const { camera, scene } = useThree();
   
   // Song duration constants for moon arc
@@ -281,12 +279,7 @@ const OrangeForestScene: React.FC = () => {
 
   // Scene activation detection and reset
   React.useEffect(() => {
-    setIsSceneActive(true);
     timeRef.current = 0; // Reset time when scene activates
-    
-    return () => {
-      setIsSceneActive(false);
-    };
   }, []);
 
   useFrame((_, delta) => {
