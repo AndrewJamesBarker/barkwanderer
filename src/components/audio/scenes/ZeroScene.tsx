@@ -286,13 +286,13 @@ const ZeroScene: React.FC = () => {
       {/* Nebula glow effect */}
       <mesh scale={[8, 6, 8]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial 
+            <meshBasicMaterial 
           color="#4a2c6a" 
-          transparent 
+              transparent 
           opacity={0.05}
           side={THREE.BackSide}
-        />
-      </mesh>
+            />
+          </mesh>
       
       {/* Subtle ambient lighting for depth */}
       <ambientLight intensity={0.08} color="#1a1a2e" />

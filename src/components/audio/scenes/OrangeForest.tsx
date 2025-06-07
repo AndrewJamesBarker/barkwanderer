@@ -253,14 +253,10 @@ const OrangeForestScene: React.FC = () => {
     return lines;
   }, []);
 
-  // Camera reset for this scene
+  // Camera setup for this scene
   React.useEffect(() => {
     const originalPosition = camera.position.clone();
     const originalRotation = camera.rotation.clone();
-    
-    // Reset camera to default position for OrangeForest
-    camera.position.set(0, 0, 5);
-    camera.lookAt(0, 0, 0);
     
     return () => {
       // Restore original camera position when component unmounts
@@ -300,6 +296,11 @@ const OrangeForestScene: React.FC = () => {
   }, [isSceneActive]);
 
   useFrame((_, delta) => {
+    // Smooth camera movement to OrangeForest position (exactly like RogueWave)
+    const targetPos = new THREE.Vector3(0, 0, 5);
+    camera.position.lerp(targetPos, 0.02); // Same speed as RogueWave
+    camera.lookAt(0, 0, 0); // Same simple lookAt as RogueWave
+    
     // Check if there's audio activity (more robust detection)
     const avgVolume = data.length > 0 ? Array.from(data.slice(0, 32)).reduce((sum, val) => sum + val, 0) / 32 : 0;
     const isAudioActive = data.length > 0 && avgVolume > 5; // Threshold for detecting audio
