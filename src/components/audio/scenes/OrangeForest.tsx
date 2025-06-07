@@ -393,7 +393,7 @@ const OrangeForestScene: React.FC = () => {
       
       {/* Wireframe orb - moon traveling across the sky */}
       <mesh ref={orbRef} position={[ARC_START_X, ARC_BASE_Y, ARC_Z]}>
-        <sphereGeometry args={[0.8, 12, 12]} />
+        <sphereGeometry args={[0.6, 12, 12]} />
         <meshBasicMaterial 
           color="#f8bbd9" 
           wireframe
