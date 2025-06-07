@@ -154,7 +154,6 @@ export const RogueWaveScene: React.FC = () => {
   useFrame((_, delta) => {
     timeRef.current += delta;
     const volume = average(data.slice(0, 36));
-    const silence = volume < 1;
 
     // Fixed camera position for stable landscape view
     const targetPos = new THREE.Vector3(0, 6, 10); // No movement with audio

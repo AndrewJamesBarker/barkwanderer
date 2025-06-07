@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
@@ -91,13 +91,15 @@ const OrangeForestScene: React.FC = () => {
   const timeRef = useRef(0);
   const data = useAudioAnalyser();
   const [isSceneActive, setIsSceneActive] = React.useState(true);
-  const { camera } = useThree();
+  const { camera, scene } = useThree();
   
   // Song duration constants for moon arc
   const SONG_DURATION = 163; // 2:43 in seconds
-  const ARC_START_X = -15; // Further left side of visible area
+  const ARC_START_X = -8; // Closer left side for better visibility
   const ARC_END_X = 8; // Right side of visible area
-  const ARC_HEIGHT = 2; // Lower peak height of arc
+  const ARC_HEIGHT = 1; // Even lower peak height
+  const ARC_BASE_Y = 2.0; // Even lower in the sky
+  const ARC_Z = -10; // Much closer to camera for better visibility
 
   // Firefly material and geometry
   const fireflyMaterial = useMemo(() => {
@@ -253,53 +255,45 @@ const OrangeForestScene: React.FC = () => {
     return lines;
   }, []);
 
-  // Camera setup for this scene
-  React.useEffect(() => {
+  // Camera setup for this scene - start from bird's eye view and swoop to landscape
+  useEffect(() => {
     const originalPosition = camera.position.clone();
     const originalRotation = camera.rotation.clone();
+    const originalFog = scene.fog;
+    const originalBackground = scene.background;
+    
+    // Set initial bird's eye view position (high up looking down)
+    camera.position.set(0, 25, 15);
+    camera.lookAt(0, 0, 0);
+    
+    // Set scene atmosphere
+    scene.fog = new THREE.Fog("#1a0a0f", 1, 50); // Dark forest fog
+    scene.background = new THREE.Color("#0a0408"); // Very dark background
     
     return () => {
-      // Restore original camera position when component unmounts
+      // Restore original settings when component unmounts
       camera.position.copy(originalPosition);
       camera.rotation.copy(originalRotation);
+      scene.fog = originalFog;
+      scene.background = originalBackground;
     };
-  }, [camera]);
+  }, [camera, scene]);
 
   // Scene activation detection and reset
   React.useEffect(() => {
     setIsSceneActive(true);
+    timeRef.current = 0; // Reset time when scene activates
     
-    // Reset all state when scene becomes active
-    timeRef.current = 0;
-    if (orbRef.current) {
-              // Position orb at the start of its arc journey (left side of visible area)
-        orbRef.current.position.set(ARC_START_X, 3, -40);
-      orbRef.current.rotation.set(0, 0, 0);
-    }
-
-    // Cleanup when scene becomes inactive
     return () => {
       setIsSceneActive(false);
     };
-  }, []); // Empty dependency array ensures this runs on mount/unmount
-
-  // Additional reset when data changes (indicating scene switch)
-  React.useEffect(() => {
-    if (isSceneActive) {
-      timeRef.current = 0;
-      if (orbRef.current) {
-        // Position orb at the start of its arc journey (left side of visible area)
-        orbRef.current.position.set(ARC_START_X, 3, -40);
-        orbRef.current.rotation.set(0, 0, 0);
-      }
-    }
-  }, [isSceneActive]);
+  }, []);
 
   useFrame((_, delta) => {
-    // Smooth camera movement to OrangeForest position (exactly like RogueWave)
-    const targetPos = new THREE.Vector3(0, 0, 5);
-    camera.position.lerp(targetPos, 0.02); // Same speed as RogueWave
-    camera.lookAt(0, 0, 0); // Same simple lookAt as RogueWave
+    // Smooth camera swooping from bird's eye to landscape view (like RogueWave)
+    const targetPos = new THREE.Vector3(0, 2, 8); // Landscape position - slightly higher and further back
+    camera.position.lerp(targetPos, 0.015); // Slightly slower swoop for dramatic effect
+    camera.lookAt(0, 0, -5); // Look forward into the forest scene
     
     // Check if there's audio activity (more robust detection)
     const avgVolume = data.length > 0 ? Array.from(data.slice(0, 32)).reduce((sum, val) => sum + val, 0) / 32 : 0;
@@ -318,12 +312,13 @@ const OrangeForestScene: React.FC = () => {
       // Calculate arc position
       const arcX = ARC_START_X + (ARC_END_X - ARC_START_X) * progress;
       
-              // Create parabolic arc for Y position (starts low, peaks in middle, ends low)
-        const arcY = 3 + Math.sin(progress * Math.PI) * ARC_HEIGHT;
+      // Create parabolic arc for Y position (starts low, peaks in middle, ends low)
+      const arcY = ARC_BASE_Y + Math.sin(progress * Math.PI) * ARC_HEIGHT;
       
       // Update orb position along the arc
       orbRef.current.position.x = arcX;
       orbRef.current.position.y = arcY;
+      orbRef.current.position.z = ARC_Z; // Keep consistent Z position
       
       if (isAudioActive) {
         // Slow rotation while moving
@@ -397,15 +392,11 @@ const OrangeForestScene: React.FC = () => {
       ))}
       
       {/* Wireframe orb - moon traveling across the sky */}
-      <mesh ref={orbRef} position={[ARC_START_X, 3, -40]}>
-        <sphereGeometry args={[1.5, 12, 12]} />
-        <meshStandardMaterial 
-          color="white" 
+      <mesh ref={orbRef} position={[ARC_START_X, ARC_BASE_Y, ARC_Z]}>
+        <sphereGeometry args={[0.8, 12, 12]} />
+        <meshBasicMaterial 
+          color="#f8bbd9" 
           wireframe
-          emissive="white"
-          emissiveIntensity={0.05}
-          roughness={0.3}
-          metalness={0.1}
         />
       </mesh>
       
