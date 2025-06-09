@@ -1,54 +1,48 @@
-# React + TypeScript + Vite
+# BarkWanderer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An immersive web-based music experience featuring interactive audio visualization and ambient soundscapes. Built with React, Three.js, and modern web technologies.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Audio Player** - Stream and control a curated collection of ambient tracks
+- **Real-time Audio Visualization** - Dynamic 3D graphics that respond to music playback
+- **Poetry Integration** - Contextual poetry display synchronized with musical selections
+- **Glassmorphism UI** - Modern, translucent design with smooth animations
+- **Responsive Design** - Optimized for desktop and mobile devices
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 19, TypeScript
+- **3D Graphics**: Three.js, React Three Fiber, React Three Drei
+- **Styling**: Tailwind CSS 4.x
+- **Build Tool**: Vite
+- **Audio**: Web Audio API
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+src/
+├── components/
+│   ├── atoms/          # Basic UI components
+│   ├── molecules/      # Composite components
+│   └── organisms/      # Complex layout components
+├── assets/             # Audio files and static resources
+└── App.tsx            # Main application component
+```
+
+## License
+
+Private project - All rights reserved.
