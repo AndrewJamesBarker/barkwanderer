@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Clouds, Cloud } from "@react-three/drei";
 import { useAudioAnalyser } from "../useAudioAnalyser";
+import cloudTextureUrl from "/src/assets/cloud.png";
 
 const RecurringDreamScene: React.FC = () => {
   const groupRef = useRef<THREE.Group>(null);
@@ -25,7 +26,7 @@ const RecurringDreamScene: React.FC = () => {
 
   return (
     <group ref={groupRef}>
-      <Clouds material={THREE.MeshBasicMaterial} limit={800} range={40}>
+      <Clouds material={THREE.MeshBasicMaterial} limit={800} range={40} texture={cloudTextureUrl}>
         <Cloud
           key="stable"
           seed={1}

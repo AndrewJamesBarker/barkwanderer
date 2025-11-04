@@ -19,12 +19,24 @@ const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [nowPlaying, setNowPlaying] = React.useState<string | null>(null);
   
-  const playSong = (src: string, label: string) => {
+  const playSong = async (src: string, label: string) => {
     if (audioRef.current) {
+      // Pause and reset current audio before changing source
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      
       audioRef.current.src = src;
       audioRef.current.load();
-      audioRef.current.play();
-      setNowPlaying(label);
+      
+      // Handle play() promise to avoid AbortError
+      try {
+        await audioRef.current.play();
+        setNowPlaying(label);
+      } catch (error) {
+        // User interaction may be required, or playback was interrupted
+        console.warn('Audio playback failed:', error);
+        setNowPlaying(null);
+      }
     }
   };
 

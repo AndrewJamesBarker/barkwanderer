@@ -3,6 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useAudioAnalyser } from "../useAudioAnalyser";
 import { Clouds, Cloud } from "@react-three/drei";
 import * as THREE from "three";
+import cloudTextureUrl from "/src/assets/cloud.png";
 
 const EndorsGambitScene: React.FC = () => {
   const data = useAudioAnalyser();
@@ -59,7 +60,7 @@ const EndorsGambitScene: React.FC = () => {
 
       {/* Clouds */}
       <group ref={cloudGroupRef} position={[-150, 25, 40]}>
-        <Clouds material={THREE.MeshBasicMaterial} limit={1000} range={100}>
+        <Clouds material={THREE.MeshBasicMaterial} limit={1000} range={100} texture={cloudTextureUrl}>
           <Cloud
             seed={4}
             position={[0, 0, 0]}
